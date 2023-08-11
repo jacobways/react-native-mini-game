@@ -11,8 +11,14 @@ function StartGameScreen() {
         autoCapitalize="none"
         autoCorrect={false}
       />
-      <PrimaryButton text={"Reset"} />
-      <PrimaryButton text={"Confirm"} />
+      <View style={styles.buttonsContainer}>
+        <View style={styles.buttonContainer}>
+          <PrimaryButton text={"Reset"} />
+        </View>
+        <View style={styles.buttonContainer}>
+          <PrimaryButton text={"Confirm"} />
+        </View>
+      </View>
     </View>
   );
 }
@@ -21,10 +27,12 @@ export default StartGameScreen;
 
 const styles = StyleSheet.create({
   inputContainer: {
+    justifyContent: "center",
+    alignItems: "center",
     marginTop: 100,
     marginHorizontal: 24,
     padding: 16,
-    backgroundColor: "#72063c",
+    backgroundColor: "#4e0329",
     borderRadius: 8,
     elevation: 4, // android 그림자
     shadowColor: "black", // ios 그림자
@@ -42,5 +50,11 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     fontWeight: "bold",
     textAlign: "center",
+  },
+  buttonsContainer: {
+    flexDirection: "row",
+  },
+  buttonContainer: {
+    flex: 1,
   },
 });
