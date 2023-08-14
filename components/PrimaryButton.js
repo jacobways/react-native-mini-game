@@ -1,10 +1,6 @@
 import { View, Text, Pressable, StyleSheet } from "react-native";
 
-function PrimaryButton({ text }) {
-  function pressHandler() {
-    console.log("press!");
-  }
-
+function PrimaryButton({ text, onPress }) {
   // style에 pressed를 전달해야 ios에서도 표시 가능
   // style에 배열로 복수 스타일 입력 가능
 
@@ -16,7 +12,7 @@ function PrimaryButton({ text }) {
             ? [styles.buttonInnerContainer, styles.pressed]
             : styles.buttonInnerContainer
         }
-        onPress={pressHandler}
+        onPress={onPress}
         android_ripple={{ color: "#644202" }}
       >
         <Text style={styles.buttonText}>{text}</Text>
