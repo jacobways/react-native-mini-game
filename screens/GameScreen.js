@@ -60,12 +60,12 @@ function GameScreen({ userNumber, onGameOver }) {
         <View>
           {/* .bind로 매개변수 미리 설정 가능 */}
           <PrimaryButton
-            text={"+"}
+            text={"-"}
             onPress={nextGuessHandler.bind(this, "lower")}
           />
 
           <PrimaryButton
-            text={"-"}
+            text={"+"}
             onPress={nextGuessHandler.bind(this, "greater")}
           />
         </View>
