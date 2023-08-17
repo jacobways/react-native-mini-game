@@ -6,7 +6,7 @@ function PrimaryButton({ text, onPress }) {
   // style에 배열로 복수 스타일 입력 가능
 
   return (
-    <View style={styles.buttonInnerContainer}>
+    <View style={styles.buttonOuterContainer}>
       <Pressable
         style={({ pressed }) =>
           pressed
