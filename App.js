@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet, View, ImageBackground } from "react-native";
+import { StyleSheet, View, ImageBackground, SafeAreaView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 import StartGameScreen from "./screens/StartGameScreen";
@@ -26,7 +26,8 @@ export default function App() {
         style={styles.rootSceen}
         imageStyle={styles.backgroundImages} // 특별한 props
       >
-        {screen}
+        {/* // SafeAreaView는 상단 노치 영역을 빼줘서 노치에 콘텐츠가 가려지는 일 방지 */}
+        <SafeAreaView style={styles.rootSceen}>{screen}</SafeAreaView>
       </ImageBackground>
     </LinearGradient>
   );
