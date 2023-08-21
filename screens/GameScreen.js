@@ -58,18 +58,23 @@ function GameScreen({ userNumber, onGameOver }) {
       <Title children={"Opponent Guess"} />
       <NumberContainer children={currentGuess} />
       <Card>
-        <InstructionText>Higher or lower?</InstructionText>
-        <View>
-          {/* .bind로 매개변수 미리 설정 가능 */}
-          <PrimaryButton
-            text={"-"}
-            onPress={nextGuessHandler.bind(this, "lower")}
-          />
-
-          <PrimaryButton
-            text={"+"}
-            onPress={nextGuessHandler.bind(this, "greater")}
-          />
+        <InstructionText style={styles.instructionText}>
+          Higher or lower?
+        </InstructionText>
+        <View style={styles.buttonsContainer}>
+          <View style={styles.buttonContainer}>
+            {/* .bind로 매개변수 미리 설정 가능 */}
+            <PrimaryButton
+              text={"-"}
+              onPress={nextGuessHandler.bind(this, "lower")}
+            />
+          </View>
+          <View style={styles.buttonContainer}>
+            <PrimaryButton
+              text={"+"}
+              onPress={nextGuessHandler.bind(this, "greater")}
+            />
+          </View>
         </View>
       </Card>
       {/* <View>LOG ROUNDS</View> */}
@@ -83,5 +88,14 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     padding: 12,
+  },
+  instructionText: {
+    marginBottom: 12,
+  },
+  buttonsContainer: {
+    flexDirection: "row",
+  },
+  buttonContainer: {
+    flex: 1,
   },
 });
