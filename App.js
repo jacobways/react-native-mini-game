@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { StyleSheet, View, ImageBackground, SafeAreaView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen"; // 스플래시나 로딩 화면을 연장하게 만듬. 여기서는 글꼴이 불러와질 때가지 해당 화면 연장시키기 위해 사용
 
 import StartGameScreen from "./screens/StartGameScreen";
 import GameScreen from "./screens/GameScreen";
@@ -10,6 +12,28 @@ import Colors from "./constants/colors";
 export default function App() {
   const [userNumber, setUserNumber] = useState();
   const [gameIsOver, setGameIsOver] = useState(true);
+
+  // useFonts는 컴포넌트에 글꼴 로딩하는 hook
+  // 첫번째 엘리먼트는 로딩 여부를 boolean 타입으로 보여줌
+  const [fontsLoaded] = useFonts({
+    "open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
+    "open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf"),
+  });
+
+  // 글꼴이 모두 로딩되어야 스플래시 화면이 안 나타남
+  useEffect(() => {
+    async function hideSplashScreen() {
+      await SplashScreen.hideAsync(); //splash screen 닫기
+    }
+    if (fontsLoaded) {
+      //font 로드완료
+      hideSplashScreen();
+    }
+  }, [fontsLoaded]); //fontsLoaded 상태 변경 마다 실행
+
+  if (!fontsLoaded) {
+    return null;
+  }
 
   function pickedNumberHandler(pickedNumber) {
     setUserNumber(pickedNumber);
