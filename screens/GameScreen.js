@@ -6,6 +6,7 @@ import PrimaryButton from "../components/ui/PrimaryButton";
 import Card from "../components/ui/Card";
 import InstructionText from "../components/ui/InstructionText";
 import { Ionicons } from "@expo/vector-icons";
+import GuessLogItem from "../components/game/GuessLogItem";
 
 function generateRandomBetween(min, max, exclude) {
   const rndNum = Math.floor(Math.random() * (max - min)) + min;
@@ -27,7 +28,7 @@ function GameScreen({ userNumber, onGameOver }) {
 
   useEffect(() => {
     if (currentGuess === userNumber) {
-      onGameOver();
+      onGameOver(guessRounds.length);
     }
   }, [currentGuess, userNumber, onGameOver]);
 
@@ -61,6 +62,8 @@ function GameScreen({ userNumber, onGameOver }) {
     setGuessRounds((prevGuessRounds) => [newRndNumber, ...prevGuessRounds]);
   }
 
+  const guessRoundsListLength = guessRounds.length;
+
   return (
     <View style={styles.screen}>
       <Title children={"Opponent Guess"} />
@@ -85,13 +88,18 @@ function GameScreen({ userNumber, onGameOver }) {
           </View>
         </View>
       </Card>
-      <View>
-        {guessRounds.map((guessRound) => (
+      <View style={styles.listContainer}>
+        {/* {guessRounds.map((guessRound) => (
           <Text key={guessRound}>{guessRound}</Text>
-        ))}
+        ))} */}
         <FlatList
           data={guessRounds}
-          renderItem={(itemData) => <Text>{itemData.item}</Text>}
+          renderItem={(itemData) => (
+            <GuessLogItem
+              roundNumber={guessRoundsListLength - itemData.index}
+              guess={itemData.item}
+            />
+          )}
           keyExtractor={(item) => item}
         />
       </View>
@@ -114,5 +122,10 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
+  },
+  listContainer: {
+    // FlatList는 높이가 무한인 것처럼 작용하여 스크롤에 짤리는 부분 생김 - 부모 컨테이너 높이 제한하여 문제 해결
+    flex: 1,
+    padding: 16,
   },
 });
